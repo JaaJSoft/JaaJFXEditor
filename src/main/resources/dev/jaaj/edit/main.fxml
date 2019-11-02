@@ -1,0 +1,24 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
+<?import org.fxmisc.richtext.CodeArea?>
+<BorderPane fx:controller="dev.jaaj.edit.controller.MainController"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <fx:include fx:id="menu" source="menu.fxml"/>
+    </top>
+    <center>
+        <fx:include source="editor.fxml"/>
+    </center>
+    <bottom>
+        <HBox>
+            <Button text="BottomBar"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="button"/>
+        </HBox>
+    </bottom>
+</BorderPane>
