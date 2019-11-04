@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import org.fxmisc.flowless.VirtualizedScrollPane?>
 <?import org.fxmisc.richtext.CodeArea?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane fx:controller="dev.jaaj.edit.controller.MainController"
             xmlns:fx="http://javafx.com/fxml">
     <top>
@@ -15,10 +16,13 @@
         <fx:include source="editor.fxml"/>
     </center>
     <bottom>
-        <HBox>
-            <Button text="BottomBar"/>
-            <Pane HBox.hgrow="ALWAYS"/>
-            <Button text="button"/>
-        </HBox>
+        <VBox>
+            <fx:include source="terminal.fxml"/>
+            <HBox>
+                <Button text="BottomBar"/>
+                <Pane HBox.hgrow="ALWAYS"/>
+                <Button text="button"/>
+            </HBox>
+        </VBox>
     </bottom>
 </BorderPane>

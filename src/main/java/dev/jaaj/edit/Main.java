@@ -25,17 +25,17 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
-        fileChooser.getExtensionFilters().addAll(
-                new ExtensionFilter("Text Files", "*.txt"),
-                new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
-                new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
-                new ExtensionFilter("All Files", "*.*"));
-        File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        if (selectedFile != null) {
-            System.out.println(selectedFile.toString());
-        }
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Open Resource File");
+//        fileChooser.getExtensionFilters().addAll(
+//                new ExtensionFilter("Text Files", "*.txt"),
+//                new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
+//                new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
+//                new ExtensionFilter("All Files", "*.*"));
+//        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+//        if (selectedFile != null) {
+//            System.out.println(selectedFile.toString());
+//        }
     }
 
 
