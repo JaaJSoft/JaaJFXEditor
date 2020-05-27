@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.fxmisc.flowless.VirtualizedScrollPane?>
+<?import org.fxmisc.richtext.CodeArea?>
+<TabPane xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="dev.jaaj.fx.edit.controller.EditorController" fx:id="tabPane">
+    <Tab>
+        <VirtualizedScrollPane>
+            <content>
+                <CodeArea fx:id="codeArea" lineHighlighterOn="true"/>
+            </content>
+        </VirtualizedScrollPane>
+    </Tab>
+</TabPane>
+

@@ -8,5 +8,5 @@ pluginManagement {
 }
 
 
-rootProject.name = 'JaaJEdit'
+rootProject.name = 'JaaJFXEditor'
 
