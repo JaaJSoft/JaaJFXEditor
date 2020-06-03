@@ -8,36 +8,33 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public class FilesWatchServiceTest {
-    private FilesWatchService filesWatchService;
+    private final FilesWatchService filesWatchService =  FilesWatchService.getInstance();
+
+    public FilesWatchServiceTest() throws IOException {
+    }
 
     @Before
     public void setUp() throws Exception {
-        filesWatchService = new FilesWatchService();
     }
 
     @Test
     public void register() throws IOException, InterruptedException {
-        File ah = Path.of("D:/test/AH.txt").toFile();
-        File ah2 = Path.of("D:/AH.txt").toFile();
-        File jaaj = Path.of("D:/JAAJ.txt").toFile();
-        FileChangedOnDiskListener fileChangedOnDiskListener = new FileChangedOnDiskListener() {
-            @Override
-            public void changed(File file) {
-                System.out.println("MODIFY " + file);
-            }
+        Path ah = Path.of("D:/test/AH.txt");
+        Path ah2 = Path.of("D:/AH.txt");
+        Path jaaj = Path.of("D:/JAAJ.txt");
+        FileChangedListener fileChangedOnDiskListener = event -> System.out.println("CHANGED : " + event.getSource());
+        FileDeletedListener fileDeletedListener = event -> System.out.println("DELETED : " + event.getSource());
 
-            @Override
-            public void deleted(File file) {
-                System.out.println("DELETED " + file);
-            }
-        };
-        filesWatchService.register(ah, fileChangedOnDiskListener);
-        filesWatchService.register(ah2, fileChangedOnDiskListener);
-        filesWatchService.register(jaaj, fileChangedOnDiskListener);
+        filesWatchService.addListener(ah, fileChangedOnDiskListener);
+        filesWatchService.addListener(ah, fileChangedOnDiskListener);
+
+        filesWatchService.addListener(ah2, fileChangedOnDiskListener);
+        filesWatchService.addListener(jaaj, fileChangedOnDiskListener);
 
         Thread.sleep(5000);
         filesWatchService.unregister(ah);
         filesWatchService.unregister(ah2);
+
         while (filesWatchService.isRunning()) ;
     }
 }
