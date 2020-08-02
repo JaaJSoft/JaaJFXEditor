@@ -1,52 +1,56 @@
+/*
+ * Copyright 2020 JaaJSoft
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package dev.jaaj.fx.edit.util.file;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import dev.jaaj.file.watchservice.PathWatchService;
+import javafx.beans.property.StringPropertyBase;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-public class FileProperty {
-    private File file;
-    private final StringProperty fileContent = new SimpleStringProperty();
+public class FileProperty extends StringPropertyBase {
+    private final Path documentPath;
 
-    public FileProperty(File file) throws NoSuchFileException {
-        this.file = file;
-        if (!file.exists()) {
-            throw new NoSuchFileException(file.getAbsolutePath());
+    public FileProperty(Path documentPath) throws IOException {
+        PathWatchService pathWatchService = new PathWatchService();
+        if (!Files.exists(documentPath)) {
+            throw new FileNotFoundException();
         }
-        fileContent.setValue(readAll(file));
+        this.documentPath = documentPath;
+        loadFromFile();
     }
 
-    private String readAll(File file) {
+    @Override
+    public Object getBean() {
+        return documentPath;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    public void loadFromFile() {
         try {
-            return Files.readString(file.toPath());
-        } catch (IOException e) {
-            return "";
+            setValue(Files.readString(documentPath));
+        } catch (IOException ignored) {
         }
-    }
 
-    public FileProperty() {
-    }
-
-
-    public String getFileContent() {
-        return fileContent.get();
-    }
-
-    public StringProperty fileContentProperty() {
-        return fileContent;
-    }
-
-    public void setFileContent(String fileContent) {
-        this.fileContent.set(fileContent);
-    }
-
-    public File getFile() {
-        return file;
     }
 }
